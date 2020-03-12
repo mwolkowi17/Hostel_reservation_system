@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdditionalMethods.cs" />
     <Compile Include="Guest.cs" />
+    <Compile Include="ReservationBook.cs" />
     <Compile Include="Room.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
