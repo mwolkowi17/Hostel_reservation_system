@@ -8,7 +8,7 @@ namespace Pensjonat.Data
 {
     class ReservationBook
     {
-        List<Room> ReservationOfRooms = new List<Room>();
-        List<Guest> GuestList = new List<Guest>();
+        public List<Room> ReservationOfRooms = new List<Room>();
+        public List<Guest> GuestList = new List<Guest>();
     }
 }
