@@ -32,6 +32,7 @@ namespace Pensjonat.Data
             RoomNumber = roomnumber;
             Price = price;
             Type = type;
+            RoomID++;
            
         }
         public override string ToString()

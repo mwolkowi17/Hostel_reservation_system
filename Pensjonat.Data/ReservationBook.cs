@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Pensjonat.Data
 {
-    class ReservationBook
+   public class ReservationBook
     {
         public List<Room> ReservationOfRooms = new List<Room>();
         public List<Guest> GuestList = new List<Guest>();
+        public List<Room> RoomList = new List<Room>();
     }
 }
