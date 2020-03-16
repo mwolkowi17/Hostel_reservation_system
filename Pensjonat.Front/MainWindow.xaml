@@ -14,7 +14,11 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <ComboBox Margin="5" />
-
+        <ComboBox x:Name ="Lista" ItemsSource="{Binding Path=lista}" Margin="5,5,5.4,5" SelectedItem="{Binding Path=Listawybrana , Mode=TwoWay}"/>
+        <DataGrid Grid.Row="1"
+                  Margin="5"
+                  AutoGenerateColumns="True"
+                  CanUserAddRows="False" 
+                  ItemsSource="{Binding Path=ShowedList}" />
     </Grid>
 </Window>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pensjonat.UI.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace Pensjonat.Front
 {
     /// <summary>
@@ -20,9 +22,12 @@ namespace Pensjonat.Front
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MaintenanceFormViewModel viewModel =
+                    new MaintenanceFormViewModel();
         public MainWindow()
         {
             InitializeComponent();
+            this.Loaded += (s, e) => { this.DataContext = this.viewModel; };
         }
     }
 }

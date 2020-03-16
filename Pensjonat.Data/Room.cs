@@ -35,6 +35,11 @@ namespace Pensjonat.Data
             RoomID++;
            
         }
+
+        public Room(RoomType type)
+        {
+            Type = type;
+        }
         public override string ToString()
         {
             return "Nr pokoju "+RoomNumber + "- cena: " + Price;

@@ -20,6 +20,16 @@ namespace Pensjonat.Data
             return newBook.GuestList;
         }
 
+        public List<Room> AddRooms(RoomType type)
+        {
+            Room NewRoom = new Room(type);
+            NewRoom.RoomID++;
+            NewRoom.RoomNumber++;
+            NewRoom.Price = 100;
+            NewRoom.IfOccupied = false;
+            newBook.RoomList.Add(NewRoom);
+            return newBook.RoomList;
+        }
         public List<Guest> AddGuest(string name, string surname, string nationality)
         {
             Guest NewGuest = new Guest(name, surname, nationality);

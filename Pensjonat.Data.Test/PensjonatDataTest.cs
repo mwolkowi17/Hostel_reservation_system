@@ -26,6 +26,16 @@ namespace Pensjonat.Data.Test
         }
 
         [TestMethod]
+
+        public void TestAddRooms()
+        {
+            AdditionalMethods model = new AdditionalMethods();
+            model.AddRooms(RoomType.single);
+            Assert.AreEqual(1, model.DisplayRooms().Count);
+
+        }
+
+        [TestMethod]
         public void TestRemoveGuest()
         {
             AdditionalMethods model = new AdditionalMethods();
