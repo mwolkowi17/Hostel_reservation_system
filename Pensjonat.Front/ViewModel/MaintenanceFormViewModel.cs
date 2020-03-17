@@ -18,9 +18,9 @@ namespace Pensjonat.UI.ViewModel
             Task.Run(() => Init());
         }
 
-        public List<Guest>PensionGuests { get; set; }
-        public List<Room>PensionRooms { get; set; }
-        public List<string> listaroboczab = new List<string>();
+        //public List<Guest>PensionGuests { get; set; }
+        //public List<Room>PensionRooms { get; set; }
+        public List<string> listaroboczab = new List<string>();// lista do której dodajemy "Guests" i "Roms" jako stringi tylko do wyświetlenia
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName]
@@ -38,6 +38,7 @@ namespace Pensjonat.UI.ViewModel
                     new PropertyChangedEventArgs(propertyName));
         }
 
+        // lista do tego zbindwoane jest to co pokazuje combobox -  w tym wypadku "Guest" i "Roms"
         public IEnumerable<string> lista
         {
             get
@@ -50,6 +51,7 @@ namespace Pensjonat.UI.ViewModel
             }
         }
 
+        // do tego zbindowane jest to co pokaże się po wybraniu wartości z combobox
         private string listawybrana;
         public string Listawybrana
         {
@@ -62,7 +64,7 @@ namespace Pensjonat.UI.ViewModel
             {
                 this.listawybrana = value;
                 this.OnPropertyChanged();
-                this.OdswiezShowedList();
+                this.OdswiezShowedList(); // odpwiada za odświerzenie wartości
 
 
             }
@@ -70,7 +72,7 @@ namespace Pensjonat.UI.ViewModel
         
         
 
-      
+        //metoda inicjująca wartości w comboboxie i przykładowe dane
         public void Init()
         {
 
@@ -78,15 +80,16 @@ namespace Pensjonat.UI.ViewModel
             listaroboczab.Add("Guests");
            
             ExampleData();
-            RefreshData();
+            //RefreshData();
         }
 
-        public void RefreshData()
+        /*public void RefreshData()
         {
             PensionGuests = resbook.GuestList;
             PensionRooms = resbook.RoomList;
-        }
+        }*/
         
+        //przykładowa dane
         public void ExampleData()
         {
             model.AddGuest("Marcin", "Wolkowicz", "Polish");
@@ -99,7 +102,7 @@ namespace Pensjonat.UI.ViewModel
         }
 
       
-
+        // metoda interfejs do której zbindowane są dane glówne
         public IEnumerable<Object> showedList;
         public IEnumerable<Object> ShowedList
         {
@@ -136,13 +139,13 @@ namespace Pensjonat.UI.ViewModel
             this.ShowedList = model.DisplayGuests();
         }
         
-        public List<string> ShowInitialList()
+        /*public List<string> ShowInitialList()
         {
             List<string> roboczalista = new List<string>();
             
             roboczalista.Add("Guests");
             roboczalista.Add("Rooms");
             return roboczalista;
-        }
+        }*/
     }
 }
