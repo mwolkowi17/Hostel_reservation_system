@@ -23,8 +23,8 @@ namespace Pensjonat.Data
         public List<Room> AddRooms(RoomType type)
         {
             Room NewRoom = new Room(type);
-            NewRoom.RoomID++;
-            NewRoom.RoomNumber++;
+            NewRoom.RoomID=newBook.RoomList.Count+1;
+            NewRoom.RoomNumber=newBook.RoomList.Count+1;
             NewRoom.Price = 100;
             NewRoom.IfOccupied = false;
             newBook.RoomList.Add(NewRoom);
@@ -33,7 +33,7 @@ namespace Pensjonat.Data
         public List<Guest> AddGuest(string name, string surname, string nationality)
         {
             Guest NewGuest = new Guest(name, surname, nationality);
-            NewGuest.GuestID++;
+            NewGuest.GuestID=newBook.GuestList.Count+1;
             newBook.GuestList.Add(NewGuest);
             return newBook.GuestList;
         }

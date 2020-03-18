@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pensjonat.Data.Test", "Pens
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pensjonat.Front", "Pensjonat.Front\Pensjonat.Front.csproj", "{3E3801CF-77D7-41DD-A138-4E1572460BAE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pensjonat.UI.Test", "Pensjonat.UI.Test\Pensjonat.UI.Test.csproj", "{46492BBF-7DCE-49E0-A8CA-7105475A3E47}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{3E3801CF-77D7-41DD-A138-4E1572460BAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E3801CF-77D7-41DD-A138-4E1572460BAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E3801CF-77D7-41DD-A138-4E1572460BAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46492BBF-7DCE-49E0-A8CA-7105475A3E47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46492BBF-7DCE-49E0-A8CA-7105475A3E47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46492BBF-7DCE-49E0-A8CA-7105475A3E47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46492BBF-7DCE-49E0-A8CA-7105475A3E47}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -18,6 +18,14 @@ namespace Pensjonat.UI.ViewModel
             Task.Run(() => Init());
         }
 
+
+        public MaintenanceFormViewModel(bool init)
+        {
+            // Konstruktor uzywany w testach jednostkowych
+            if (init)
+                Init();
+        }
+
         //public List<Guest>PensionGuests { get; set; }
         //public List<Room>PensionRooms { get; set; }
         public List<string> listaroboczab = new List<string>();// lista do której dodajemy "Guests" i "Roms" jako stringi tylko do wyświetlenia
