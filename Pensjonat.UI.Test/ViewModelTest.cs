@@ -29,6 +29,16 @@ namespace Pensjonat.UI.Test
             vm.Init();
             Assert.IsTrue(vm.lista.Count() > 0);
         }
+
+        [TestMethod]
+        public void TestAdd()
+        {
+            var vm = new MaintenanceFormViewModel(true);
+            vm.Init();
+            vm.AddButtonReservation(1);
+            
+            
+        }
     }
 
 }

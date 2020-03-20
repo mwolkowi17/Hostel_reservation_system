@@ -11,7 +11,13 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <ComboBox x:Name ="Lista" ItemsSource="{Binding Path=lista}" Margin="5,5,5.4,5" SelectedItem="{Binding Path=Listawybrana , Mode=TwoWay}"/>
@@ -20,5 +26,13 @@
                   AutoGenerateColumns="True"
                   CanUserAddRows="False" 
                   ItemsSource="{Binding Path=ShowedList}" />
+        <TextBox Grid.Row="2" >
+            <TextBox.Text>
+                <Binding Path="IdRobocze" Mode="TwoWay" />
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="3" Text="Surname"/>
+        <TextBox Grid.Row="4" Text="Nationality"/>
+        <Button Grid.Row="5" Content="Add Reservation" HorizontalAlignment="Left"  Width="90" Command="{Binding SaveCommand}"  />
     </Grid>
 </Window>

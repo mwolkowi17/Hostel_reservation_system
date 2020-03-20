@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Pensjonat.Data;
 
 namespace Pensjonat.UI.ViewModel
@@ -13,6 +14,7 @@ namespace Pensjonat.UI.ViewModel
         public AdditionalMethods model = new AdditionalMethods();
         public ReservationBook resbook = new ReservationBook();
 
+        public ICommand SaveCommand { get; private set; }
         public MaintenanceFormViewModel()
         {
             Task.Run(() => Init());
@@ -89,6 +91,11 @@ namespace Pensjonat.UI.ViewModel
            
             ExampleData();
             //RefreshData();
+
+            this.SaveCommand = new RelayCommand(
+                action => this.AddButtonReservation());
+                
+
         }
 
         /*public void RefreshData()
@@ -96,7 +103,7 @@ namespace Pensjonat.UI.ViewModel
             PensionGuests = resbook.GuestList;
             PensionRooms = resbook.RoomList;
         }*/
-        
+
         //przykładowa dane
         public void ExampleData()
         {
@@ -146,14 +153,24 @@ namespace Pensjonat.UI.ViewModel
             this.ShowedList = null;
             this.ShowedList = model.DisplayGuests();
         }
-        
-        /*public List<string> ShowInitialList()
+        //pobiera z textboxa wartość, w tym wypadku id klienta
+        private int idRobocze;
+        public int IdRobocze
         {
-            List<string> roboczalista = new List<string>();
-            
-            roboczalista.Add("Guests");
-            roboczalista.Add("Rooms");
-            return roboczalista;
-        }*/
+            get { return idRobocze; }
+            set
+            {
+                idRobocze = value;
+                this.OnPropertyChanged();
+            }
+
+        }
+        //dodaje rezerwację
+        public void AddButtonReservation()
+        {
+            model.AddReservation(IdRobocze, RoomType.doublebed);
+            this.OnPropertyChanged();
+            this.OdswiezShowedList();
+        }
     }
 }

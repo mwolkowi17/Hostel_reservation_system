@@ -29,5 +29,7 @@ namespace Pensjonat.Front
             InitializeComponent();
             this.Loaded += (s, e) => { this.DataContext = this.viewModel; };
         }
+
+       
     }
 }
