@@ -54,7 +54,7 @@ namespace Pensjonat.Data
                                                    where item.GuestID == id
                                                    select item).First();
             Room RoomToRent = (from Room item in newBook.RoomList
-                               where item.Type == kindOfRomm
+                               where item.Type == kindOfRomm && item.IfOccupied==false
                                select item).First();
 
             GuestWantingToMakeReservation.NrofRoom = RoomToRent.RoomNumber;

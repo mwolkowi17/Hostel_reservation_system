@@ -15,6 +15,7 @@ namespace Pensjonat.UI.ViewModel
         public ReservationBook resbook = new ReservationBook();
 
         public ICommand SaveCommand { get; private set; }
+        public ICommand CancelCommand { get; private set; }
         public MaintenanceFormViewModel()
         {
             Task.Run(() => Init());
@@ -94,6 +95,9 @@ namespace Pensjonat.UI.ViewModel
 
             this.SaveCommand = new RelayCommand(
                 action => this.AddButtonReservation());
+
+            this.CancelCommand = new RelayCommand(
+                action => this.CancelButtonReservation());
                 
 
         }
@@ -112,7 +116,7 @@ namespace Pensjonat.UI.ViewModel
             model.AddGuest("Franek", "Wolkowicz", "Polish");
             model.AddRooms(RoomType.doublebed);
             model.AddRooms(RoomType.doublebed);
-            model.AddRooms(RoomType.single);
+            model.AddRooms(RoomType.doublebed);
 
         }
 
@@ -172,5 +176,14 @@ namespace Pensjonat.UI.ViewModel
             this.OnPropertyChanged();
             this.OdswiezShowedList();
         }
+
+        //odwołuje rezerwację
+        public void CancelButtonReservation()
+        {
+            model.CancelReservation(IdRobocze);
+            this.OnPropertyChanged();
+            this.OdswiezShowedList();
+        }
+      
     }
 }

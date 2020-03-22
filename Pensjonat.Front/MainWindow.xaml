@@ -31,8 +31,9 @@
                 <Binding Path="IdRobocze" Mode="TwoWay" />
             </TextBox.Text>
         </TextBox>
-        <TextBox Grid.Row="3" Text="Surname"/>
-        <TextBox Grid.Row="4" Text="Nationality"/>
-        <Button Grid.Row="5" Content="Add Reservation" HorizontalAlignment="Left"  Width="90" Command="{Binding SaveCommand}"  />
+        
+        
+        <Button Grid.Row="3" Content="Add Reservation" HorizontalAlignment="Left"  Width="90" Command="{Binding SaveCommand}"  />
+        <Button Grid.Row="4" Content="Cancell Reservation" HorizontalAlignment="Left"  Width="90" Command="{Binding CancelCommand}"  />
     </Grid>
 </Window>
