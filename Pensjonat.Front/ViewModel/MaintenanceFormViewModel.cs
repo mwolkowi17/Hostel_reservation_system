@@ -90,7 +90,7 @@ namespace Pensjonat.UI.ViewModel
             listaroboczab.Add("Rooms");
             listaroboczab.Add("Guests");
            
-            ExampleData();
+            //ExampleData();
             //RefreshData();
 
             this.SaveCommand = new RelayCommand(
@@ -172,7 +172,7 @@ namespace Pensjonat.UI.ViewModel
         //dodaje rezerwację
         public void AddButtonReservation()
         {
-            model.AddReservation(IdRobocze, RoomType.doublebed);
+            model.AddReservation(IdRobocze);
             this.OnPropertyChanged();
             this.OdswiezShowedList();
         }

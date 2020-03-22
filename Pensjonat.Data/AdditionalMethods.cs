@@ -12,11 +12,19 @@ namespace Pensjonat.Data
 
         public List<Room> DisplayRooms()
         {
+            using (Model1 context = new Model1())
+            {
+                newBook.RoomList = context.Rooms.ToList();
+            }
             return newBook.RoomList;
         }
 
         public List<Guest> DisplayGuests()
         {
+            using (Model1 context = new Model1())
+            {
+                newBook.GuestList = context.Guests.ToList();
+            }
             return newBook.GuestList;
         }
 
@@ -48,46 +56,54 @@ namespace Pensjonat.Data
             return newBook.GuestList;
         }
 
-        public List<Guest> AddReservation(int id, RoomType kindOfRomm)
+        public List<Guest> AddReservation(int id)
         {
-            List<Room> robocza = (from Room item in newBook.RoomList
-                                  where item.IfOccupied == false
-                                  select item).ToList();
-            if (robocza.Count > 0)
+            using (Model1 context = new Model1())
             {
-                Guest GuestWantingToMakeReservation = (from Guest item in newBook.GuestList
-                                                       where item.GuestID == id
-                                                       select item).First();
-                Room RoomToRent = (from Room item in newBook.RoomList
-                                   where item.Type == kindOfRomm && item.IfOccupied == false
-                                   select item).First();
-                if (GuestWantingToMakeReservation.NrofRoom == 0)
+                List<Room> robocza = (from Room item in context.Rooms.ToList()//newBook.RoomList
+                                      where item.IfOccupied == false
+                                      select item).ToList();
+                if (robocza.Count > 0)
                 {
-                    GuestWantingToMakeReservation.NrofRoom = RoomToRent.RoomNumber;
-                    RoomToRent.IfOccupied = true;
+                    Guest GuestWantingToMakeReservation = (from Guest item in context.Guests.ToList()//newBook.GuestList
+                                                           where item.GuestID == id
+                                                           select item).First();
+                    Room RoomToRent = (from Room item in context.Rooms.ToList()//newBook.RoomList
+                                       where item.IfOccupied == false
+                                       select item).First();
+                    if (GuestWantingToMakeReservation.NrofRoom == 0)
+                    {
+                        GuestWantingToMakeReservation.NrofRoom = RoomToRent.RoomNumber;
+                        RoomToRent.IfOccupied = true;
+                    }
+                    context.SaveChanges();
+                    return context.Guests.ToList();//newBook.GuestList;
+
                 }
-                return newBook.GuestList;
-            }
-            else
-            {
-                return null;
+                else
+                {
+                    return null;
+                }
             }
         }
 
         public List<Guest> CancelReservation(int id)
         {
-            Guest GuestWantingCancelReservation = (from Guest item in newBook.GuestList
-                                                   where item.GuestID == id
-                                                   select item).First();
+            using (Model1 context = new Model1())
+            {
+                Guest GuestWantingCancelReservation = (from Guest item in context.Guests.ToList()//newBook.GuestList
+                                                       where item.GuestID == id
+                                                       select item).First();
 
-            Room RoomToCancel = (from Room item in newBook.RoomList
-                                 where item.RoomNumber == GuestWantingCancelReservation.NrofRoom
-                                 select item).First();
+                Room RoomToCancel = (from Room item in context.Rooms.ToList()//newBook.RoomList
+                                     where item.RoomNumber == GuestWantingCancelReservation.NrofRoom
+                                     select item).First();
 
-            GuestWantingCancelReservation.NrofRoom = 0;
-            RoomToCancel.IfOccupied = false;
-
-            return newBook.GuestList;
+                GuestWantingCancelReservation.NrofRoom = 0;
+                RoomToCancel.IfOccupied = false;
+                context.SaveChanges();
+                return newBook.GuestList;
+            }
         }
     }
 }
