@@ -23,8 +23,8 @@ namespace Pensjonat.Data
         public List<Room> AddRooms(RoomType type)
         {
             Room NewRoom = new Room(type);
-            NewRoom.RoomID=newBook.RoomList.Count+1;
-            NewRoom.RoomNumber=newBook.RoomList.Count+1;
+            NewRoom.RoomID = newBook.RoomList.Count + 1;
+            NewRoom.RoomNumber = newBook.RoomList.Count + 1;
             NewRoom.Price = 100;
             NewRoom.IfOccupied = false;
             newBook.RoomList.Add(NewRoom);
@@ -33,7 +33,7 @@ namespace Pensjonat.Data
         public List<Guest> AddGuest(string name, string surname, string nationality)
         {
             Guest NewGuest = new Guest(name, surname, nationality);
-            NewGuest.GuestID=newBook.GuestList.Count+1;
+            NewGuest.GuestID = newBook.GuestList.Count + 1;
             newBook.GuestList.Add(NewGuest);
             return newBook.GuestList;
         }
@@ -50,20 +50,31 @@ namespace Pensjonat.Data
 
         public List<Guest> AddReservation(int id, RoomType kindOfRomm)
         {
-            Guest GuestWantingToMakeReservation = (from Guest item in newBook.GuestList
-                                                   where item.GuestID == id
-                                                   select item).First();
-            Room RoomToRent = (from Room item in newBook.RoomList
-                               where item.Type == kindOfRomm && item.IfOccupied==false
-                               select item).First();
-
-            GuestWantingToMakeReservation.NrofRoom = RoomToRent.RoomNumber;
-            RoomToRent.IfOccupied = true;
-
-            return newBook.GuestList;
+            List<Room> robocza = (from Room item in newBook.RoomList
+                                  where item.IfOccupied == false
+                                  select item).ToList();
+            if (robocza.Count > 0)
+            {
+                Guest GuestWantingToMakeReservation = (from Guest item in newBook.GuestList
+                                                       where item.GuestID == id
+                                                       select item).First();
+                Room RoomToRent = (from Room item in newBook.RoomList
+                                   where item.Type == kindOfRomm && item.IfOccupied == false
+                                   select item).First();
+                if (GuestWantingToMakeReservation.NrofRoom == 0)
+                {
+                    GuestWantingToMakeReservation.NrofRoom = RoomToRent.RoomNumber;
+                    RoomToRent.IfOccupied = true;
+                }
+                return newBook.GuestList;
+            }
+            else
+            {
+                return null;
+            }
         }
 
-        public List<Guest>CancelReservation( int id)
+        public List<Guest> CancelReservation(int id)
         {
             Guest GuestWantingCancelReservation = (from Guest item in newBook.GuestList
                                                    where item.GuestID == id
