@@ -40,10 +40,13 @@ namespace Pensjonat.Data
         }
         public List<Guest> AddGuest(string name, string surname, string nationality)
         {
-            Guest NewGuest = new Guest(name, surname, nationality);
-            NewGuest.GuestID = newBook.GuestList.Count + 1;
-            newBook.GuestList.Add(NewGuest);
-            return newBook.GuestList;
+            using (Model1 context = new Model1()) { 
+                Guest NewGuest = new Guest(name, surname, nationality);
+                NewGuest.GuestID = newBook.GuestList.Count + 1;
+                context.Guests.Add(NewGuest);//newBook.GuestList.Add(NewGuest);
+                context.SaveChanges();
+                return context.Guests.ToList();//newBook.GuestList;
+            }
         }
 
         public List<Guest> RemoveGuest(int id)

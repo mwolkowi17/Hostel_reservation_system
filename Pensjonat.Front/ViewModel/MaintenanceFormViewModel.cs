@@ -16,6 +16,7 @@ namespace Pensjonat.UI.ViewModel
 
         public ICommand SaveCommand { get; private set; }
         public ICommand CancelCommand { get; private set; }
+        public ICommand AddClientCommand { get; private set; }
         public MaintenanceFormViewModel()
         {
             Task.Run(() => Init());
@@ -98,6 +99,9 @@ namespace Pensjonat.UI.ViewModel
 
             this.CancelCommand = new RelayCommand(
                 action => this.CancelButtonReservation());
+
+            this.AddClientCommand = new RelayCommand(
+                action => this.AddButtonNewClient());
                 
 
         }
@@ -184,6 +188,51 @@ namespace Pensjonat.UI.ViewModel
             this.OnPropertyChanged();
             this.OdswiezShowedList();
         }
-      
+
+        //moduł dodawania nowego klienta
+
+        //pobiera text z textboxa Name
+        private string nameRobocze;
+        public string NameRobocze
+        {
+            get { return nameRobocze; }
+            set
+            {
+                nameRobocze = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        //pobiera text z textboxa Surname
+        private string surnameRobocze;
+        public string SurnameRobocze
+        {
+            get { return surnameRobocze; }
+            set
+            {
+                surnameRobocze = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        //pobiera text z textboxa Credit Card Nr
+        private string nationalityRobocze;
+        public string NationlityRobocze
+        {
+            get { return nationalityRobocze; }
+            set
+            {
+                nationalityRobocze = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        //dodaje nowego klienta
+        public void AddButtonNewClient()
+        {
+            model.AddGuest(NameRobocze, SurnameRobocze, NationlityRobocze);
+            this.OnPropertyChanged();
+            this.OdswiezShowedList();
+        }
     }
 }
