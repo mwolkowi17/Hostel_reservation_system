@@ -40,7 +40,8 @@ namespace Pensjonat.Data
         }
         public List<Guest> AddGuest(string name, string surname, string nationality)
         {
-            using (Model1 context = new Model1()) { 
+            using (Model1 context = new Model1())
+            {
                 Guest NewGuest = new Guest(name, surname, nationality);
                 NewGuest.GuestID = newBook.GuestList.Count + 1;
                 context.Guests.Add(NewGuest);//newBook.GuestList.Add(NewGuest);
@@ -98,14 +99,21 @@ namespace Pensjonat.Data
                                                        where item.GuestID == id
                                                        select item).First();
 
-                Room RoomToCancel = (from Room item in context.Rooms.ToList()//newBook.RoomList
-                                     where item.RoomNumber == GuestWantingCancelReservation.NrofRoom
-                                     select item).First();
 
-                GuestWantingCancelReservation.NrofRoom = 0;
-                RoomToCancel.IfOccupied = false;
-                context.SaveChanges();
-                return newBook.GuestList;
+                if (GuestWantingCancelReservation.NrofRoom != 0)
+                {
+                    Room RoomToCancel = (from Room item in context.Rooms.ToList()//newBook.RoomList
+                                         where item.RoomNumber == GuestWantingCancelReservation.NrofRoom
+                                         select item).First();
+                    GuestWantingCancelReservation.NrofRoom = 0;
+                    RoomToCancel.IfOccupied = false;
+                    context.SaveChanges();
+                    return newBook.GuestList;
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
     }
