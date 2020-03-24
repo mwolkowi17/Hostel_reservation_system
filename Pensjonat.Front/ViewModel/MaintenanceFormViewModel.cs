@@ -17,6 +17,7 @@ namespace Pensjonat.UI.ViewModel
         public ICommand SaveCommand { get; private set; }
         public ICommand CancelCommand { get; private set; }
         public ICommand AddClientCommand { get; private set; }
+        public ICommand RemoveClientCommand { get; private set; }
         public MaintenanceFormViewModel()
         {
             Task.Run(() => Init());
@@ -102,6 +103,9 @@ namespace Pensjonat.UI.ViewModel
 
             this.AddClientCommand = new RelayCommand(
                 action => this.AddButtonNewClient());
+
+            this.RemoveClientCommand = new RelayCommand(
+                action => this.RemoveButtonClient());
                 
 
         }
@@ -231,6 +235,28 @@ namespace Pensjonat.UI.ViewModel
         public void AddButtonNewClient()
         {
             model.AddGuest(NameRobocze, SurnameRobocze, NationlityRobocze);
+            this.OnPropertyChanged();
+            this.OdswiezShowedList();
+        }
+
+        //moduł usuwania klienta
+
+        //pobiera Id klienta do usunięcia
+        private int idClientToRemove;
+        public int IdClientToRemove
+        {
+            get { return idClientToRemove; }
+            set
+            {
+                idClientToRemove = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        //usuwa klienta
+        public void RemoveButtonClient()
+        {
+            model.RemoveGuest(IdClientToRemove);
             this.OnPropertyChanged();
             this.OdswiezShowedList();
         }

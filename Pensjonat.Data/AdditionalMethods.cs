@@ -52,12 +52,21 @@ namespace Pensjonat.Data
 
         public List<Guest> RemoveGuest(int id)
         {
-            Guest RemoveFromListGuest = (from Guest item in newBook.GuestList
+            using (Model1 context = new Model1()) {
+                if (context.Guests.ToList().Count >= id) { 
+                Guest RemoveFromListGuest = (from Guest item in context.Guests.ToList()//newBook.GuestList
                                          where item.GuestID == id
                                          select item).First();
 
-            newBook.GuestList.Remove(RemoveFromListGuest);
-            return newBook.GuestList;
+            context.Guests.Remove(RemoveFromListGuest);
+                context.SaveChanges();
+                return context.Guests.ToList();//newBook.GuestList;
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
 
         public List<Guest> AddReservation(int id)
